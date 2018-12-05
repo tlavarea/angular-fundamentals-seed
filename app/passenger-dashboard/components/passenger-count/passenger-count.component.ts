@@ -17,7 +17,7 @@ export class PassengerCountComponent implements OnInit {
 	ngOnInit(): void { }
 
 	checkedInCount(): number {
-		if (this.items.length) {
+		if (this.items && this.items.length) {
 			return this.items.filter((passenger: Passenger) => passenger.checkedIn).length;
 		}
 

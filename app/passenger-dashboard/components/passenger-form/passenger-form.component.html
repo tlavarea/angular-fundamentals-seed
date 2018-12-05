@@ -1,0 +1,57 @@
+<form #form="ngForm" novalidate>
+	{{ detail | json }}
+	<div>
+		Passenger Name:
+		<input type="text" name="fullname" [ngModel]="detail?.fullname">
+	</div>
+	<div>
+		Passenger ID:
+		<input type="number" name="id" [ngModel]="detail?.id">
+	</div>
+	<div>
+		<label for="checkedIn">
+			<input type="checkbox" 
+					name="checkedIn" 
+					[ngModel]="detail?.checkedIn" 
+					(ngModelChange)="toggleCheckIn($event)">
+		</label>
+		<!-- <label for="checkedIn">
+			<input type="radio" 
+					name="checkedIn" 
+					[ngModel]="detail?.checkedIn" 
+					[value]="true"
+					(ngModelChange)="toggleCheckIn($event)">
+			Yes
+		</label>
+		<label for="checkedIn">
+			<input type="radio" 
+					name="checkedIn" 
+					[ngModel]="detail?.checkedIn" 
+					[value]="false"
+					(ngModelChange)="toggleCheckIn($event)">
+			No
+		</label> -->
+	</div>
+	<div *ngIf="form.value.checkedIn">
+		Check-in Date:
+		<input type="number"
+				name="checkInDate"
+				[ngModel]="detail?.checkInDate">
+	</div>
+	<div>
+		Luggage:
+		<select name="baggage" [ngModel]="detail?.baggage">
+			<option *ngFor="let item of baggage" 
+					[value]="item.key"
+					[selected]="item.key === detail?.baggage">
+				{{ item.value }}
+			</option>
+		</select>
+		<select name="baggage" [ngModel]="detail?.baggage">
+			<option *ngFor="let item of baggage" [ngValue]="item.key">  <!-- Can use ngValue instead of value and selected -->
+				{{ item.value }}
+			</option>
+		</select>
+	</div>
+	{{ form.value | json }}
+</form>
