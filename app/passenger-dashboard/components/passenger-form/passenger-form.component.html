@@ -1,12 +1,26 @@
-<form #form="ngForm" novalidate>
+<form #form="ngForm" novalidate (ngSubmit)="handleSubmit(form.value, form.valid)">
 	{{ detail | json }}
 	<div>
 		Passenger Name:
-		<input type="text" name="fullname" [ngModel]="detail?.fullname">
+		<input type="text" 
+				name="fullname" 
+				[ngModel]="detail?.fullname" 
+				#fullname="ngModel"
+				required>
+		<div class="error" *ngIf="fullname.errors?.required && fullname.dirty">
+			Passenger name is required
+		</div>
 	</div>
 	<div>
 		Passenger ID:
-		<input type="number" name="id" [ngModel]="detail?.id">
+		<input type="number" 
+				name="id" 
+				[ngModel]="detail?.id"
+				#id="ngModel"
+				required>
+		<div class="error" *ngIf="id.errors?.required && id.dirty">
+			Passenger ID is required
+		</div>
 	</div>
 	<div>
 		<label for="checkedIn">
@@ -47,11 +61,13 @@
 				{{ item.value }}
 			</option>
 		</select>
-		<select name="baggage" [ngModel]="detail?.baggage">
-			<option *ngFor="let item of baggage" [ngValue]="item.key">  <!-- Can use ngValue instead of value and selected -->
+		<!-- <select name="baggage" [ngModel]="detail?.baggage">
+			<option *ngFor="let item of baggage" [ngValue]="item.key">  Can use ngValue instead of value and selected
 				{{ item.value }}
 			</option>
-		</select>
+		</select> -->
 	</div>
-	{{ form.value | json }}
+	<button type="submit" [disabled]="form.invalid">
+		Update passenger
+	</button>
 </form>

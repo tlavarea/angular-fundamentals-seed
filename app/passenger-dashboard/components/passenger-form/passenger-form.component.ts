@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Baggage } from '../../models/baggage.interface';
 import { Passenger } from '../../models/passenger.interface';
@@ -33,9 +33,18 @@ export class PassengerFormComponent implements OnInit {
 	@Input()
 	detail: Passenger;
 
+	@Output()
+	update: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
 	constructor() { }
 
 	ngOnInit(): void { }
+
+	handleSubmit(passenger: Passenger, isValid: boolean) {
+		if (isValid) {
+			this.update.emit(passenger);
+		}
+	}
 
 	toggleCheckIn(checkedIn: boolean) {
 		if (checkedIn) {
