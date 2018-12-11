@@ -4,10 +4,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": true,
-    "pretty": true,
-    "sourceMap": true,
-    "lib": ["es5", "dom"],
-    "strictNullChecks": false
+	"pretty": true,
+	"sourceMap": true,
+	"declaration": false,
+	"lib": [
+		"es2018",
+		"dom"
+	]
   },
   "exclude": [
     "node_modules"

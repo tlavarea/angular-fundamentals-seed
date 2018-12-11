@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { Passenger } from '../../models/passenger.interface';
 
+
 @Component({
 	selector: 'passenger-count',
 	templateUrl: './passenger-count.component.html',

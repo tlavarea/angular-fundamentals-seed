@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 
 import { Passenger } from '../../models/passenger.interface';
 
+
 @Component({
 	selector: 'passenger-detail',
 	templateUrl: './passenger-detail.component.html',
@@ -13,10 +14,13 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 	detail: Passenger;
 
 	@Output()
-	edit: EventEmitter<Passenger> = new EventEmitter();
+	edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
 	@Output()
-	remove: EventEmitter<Passenger> = new EventEmitter();
+	remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
+	@Output()
+	view: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
 	editing: boolean = false;
 
@@ -31,6 +35,10 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
 	ngOnInit(): void { 
 		console.log('ngOnInit');
+	}
+
+	goToPassenger(): void {
+		this.view.emit(this.detail);
 	}
 
 	onNameChange(value: string): void {
